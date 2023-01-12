@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <climits>
 
 int* populateMatrix(int,std::string,std::string,int,int);
+void prims_traceback(std::string,std::string,int,int*);
 
 int main(){
 	int n;
@@ -24,6 +26,7 @@ int main(){
 			std::cout<<*(matrix+i+n*j)<<" ";
 		}
 	}
+//	prims_traceback(s1,s2,n,matrix)
 	return 0;
 }
 
@@ -39,15 +42,12 @@ int* populateMatrix(int n,std::string s1, std::string s2, int gap_penalty, int g
 			if(s1[i] == s2[j]){
 				if(i == 0 && j == 0){
 					*(matrix + i +n*j) = 2;
-					std::cout<<"Hi"<<std::endl;
 				}
 				else if(i == 0 and j != 0){
 					*(matrix + i +n*j) = max(0,0,*(matrix + i + n*(j-1))) + 2;
-					std::cout<<"He"<<std::endl;
 				}
 				else if(i != 0 && j == 0){
 					*(matrix + i +n*j) = max(0,0,*(matrix + i-1 + n*j)) + 2;
-					std::cout<<"Ho"<<std::endl;
 				}
 				else{
 					*(matrix+ i + n*j) = max(*(matrix+ i-1 + n*j),*(matrix+ i + n*(j-1)),*(matrix+ i-1 + n*(j-1))) + 2;
@@ -78,3 +78,25 @@ int max(int a, int b, int c){
 	return c;
 }
 
+void prims_traceback(std::string s1, std::string s2, int n, int* matrix){
+	std::string s1_o{""};
+	std::string s2_o{""};
+	int x,y;
+	int c{-(INT_MAX-1)};
+	for(int i = 0;i<n;i++){
+		if(*(matrix + n-1 + n*(i)) > c){
+			x = n-1;
+			y = i;
+		}
+	}
+	for(int i = 0;i<n;i++){
+		if((*matrix+i+n*(n-1)) > c){
+			x = i;
+			y = n-1;
+		}
+	}
+	while(x!=0 && y!=0){
+		if(*(matrix));
+	}
+	return;
+}
